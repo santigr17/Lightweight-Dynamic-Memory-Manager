@@ -31,14 +31,10 @@ vRef* vHeap::vMalloc(size_t pSize, string pType)
         freeSpace();
     }
 
-
     vRef* memoryReference = new vRef(_vRefID);
     _vRefID++;
 
     //memoryReference = _Size[_offSet]; // Se le asigna el pedazo de memoria al vRef;
-
-
-
 
    if(pType=="int")
    {
@@ -58,11 +54,7 @@ vRef* vHeap::vMalloc(size_t pSize, string pType)
    if(pType=="array")
    {
        _dataManager->insertNewObject(Array,_vRefID,_offSet,memoryReference);
-
    }
-
-
-
 
 
    _offSet+=pSize;
@@ -74,7 +66,10 @@ vRef* vHeap::vMalloc(size_t pSize, string pType)
    return memoryReference;
 }
 
-
+/**
+ * @brief vHeap::freeSpace
+ * Manda los archivos que no esten en uso a paginar.
+ */
 void vHeap::freeSpace()
 {
     lista_enlazada<DataInfo>* MetaDatoList = _dataManager->getMetaDatosList();
@@ -91,7 +86,10 @@ void vHeap::freeSpace()
     }
 }
 
+void vHeap::reArrangeData()
+{
 
+}
 
 
 
@@ -104,8 +102,14 @@ void vHeap::vFree(int needToFree)
 {
     //needToFree.getID;
     _dataManager->deleteData(needToFree);
+    free (_dataManager->findDataInfo(needToFree).getVRefPointer());
+
 }
 
+/**
+ * @brief vHeap::makePagination
+ * @param pDato
+ */
 void vHeap::makePagination(vRef pDato)
 {
     _binFILE->writeToAFile(pDato);
@@ -113,6 +117,11 @@ void vHeap::makePagination(vRef pDato)
     //hacer reacomodo del HEAP!
 }
 
+/**
+ * @brief vHeap::readFromPagination
+ * @param pID
+ * @return
+ */
 vRef vHeap::readFromPagination(int pID)
 {
     vRef tmpVRef = _binFILE->readFromFile(pID);// sobrecargar igual del vref para que apunte a lo que se le iguala

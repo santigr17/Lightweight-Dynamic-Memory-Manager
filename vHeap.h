@@ -48,6 +48,7 @@ private:
     void makePagination(vRef pDato);
     vRef readFromPagination(int pID);
     void freeSpace();
+    void reArrangeData();
 
 
 
