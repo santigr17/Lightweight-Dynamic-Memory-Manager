@@ -10,6 +10,7 @@
 
 #include <string.h>
 #include <iostream>
+#include "vRef.h"
 using namespace std;
 
 #define Int 0
@@ -23,7 +24,7 @@ class DataInfo {
 public:
     DataInfo();
 
-    void initInfo(int pType, int pID, int pOffset);
+    void initInfo(int pType, int pID, int pOffset, vRef *pVRef);
 
     bool isFlaginUse();
 
@@ -49,6 +50,10 @@ public:
 
     void setID(int pID);
 
+    void setVRefPointer(vRef *pVRef);
+
+    vRef* getVRefPointer();
+
 private:
     int _Size;
     int _Offset;
@@ -56,7 +61,7 @@ private:
     int _ID;
     int _ReferenceCounter;
     bool _UsageFlag;
-
+    vRef* _vRefPointer;
 
 
 

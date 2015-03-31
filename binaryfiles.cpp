@@ -20,6 +20,7 @@ vRef BinaryFiles::readFromFile(int pReadingData)
     fread(tmpVRef, tmpSize, 1,_paginacionFile);
 
     fclose(_paginacionFile);
+    cout << "tmpVREF" << tmpVRef << endl;
 
     return *tmpVRef;
 

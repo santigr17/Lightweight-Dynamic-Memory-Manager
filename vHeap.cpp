@@ -20,43 +20,86 @@ int vHeap:: _Overweight= 0; // Variable static Tamaño del archivo para paginaci
  */
 vRef* vHeap::vMalloc(size_t pSize, string pType)
 {
-    if(_offSet > 400)
+    if(_offSet+pSize > 400 && _offSet+pSize > 500)
     {
-       // expandVHeap();
+       cout << "No hay suficiente espacio en el vheap"<< endl;
+       exit(1);
     }
 
-    _Size += _offSet;
+    if (_offSet+pSize > 400)
+    {
+        freeSpace();
+    }
+
+
+    vRef* memoryReference = new vRef(_vRefID);
+    _vRefID++;
+
+    //memoryReference = _Size[_offSet]; // Se le asigna el pedazo de memoria al vRef;
+
+
+
 
    if(pType=="int")
    {
-       _dataManager->insertNewObject(Int,_vRefID,_offSet);
-       _offSet+=sizeof(int);
+       _dataManager->insertNewObject(Int,_vRefID,_offSet,memoryReference);
+
    }
    if(pType=="string")
    {
-       _dataManager->insertNewObject(String,_vRefID,_offSet);
-       _offSet+=sizeof(string);
+       _dataManager->insertNewObject(String,_vRefID,_offSet,memoryReference);
+
    }
    if(pType=="char")
    {
-       _dataManager->insertNewObject(Char,_vRefID,_offSet);
-       _offSet+=sizeof(char);
+       _dataManager->insertNewObject(Char,_vRefID,_offSet,memoryReference);
+
    }
    if(pType=="array")
    {
-       _dataManager->insertNewObject(Array,_vRefID,_offSet);
-       _offSet+=sizeof(Array); // Establecer el tamaño del array
+       _dataManager->insertNewObject(Array,_vRefID,_offSet,memoryReference);
+
    }
+
+
+
+
+
+   _offSet+=pSize;
+   _Size += _offSet;
+
    cout << "offset:" << _offSet <<endl;
-
-   vRef* memoryReference = new vRef(_vRefID);
-   _vRefID++;
-
    cout << "size: " << _Size-(_offSet)<<endl;
 
    return memoryReference;
 }
 
+
+void vHeap::freeSpace()
+{
+    lista_enlazada<DataInfo>* MetaDatoList = _dataManager->getMetaDatosList();
+    Nodo<DataInfo>* tmp = MetaDatoList->getHead();
+    for(int i= 0; i< MetaDatoList->length(); i++)
+    {
+        if (!tmp->getData().isFlaginUse())
+        {
+            makePagination(*tmp->getData().getVRefPointer());
+            cout<< "tmp ID: " << tmp->getData().getID()<< endl;
+            free(tmp->getData().getVRefPointer());
+        }
+        tmp = tmp->getNext();
+    }
+}
+
+
+
+
+
+
+/**
+ * @brief vHeap::vFree
+ * @param needToFree: ID del objeto a liberar
+ */
 void vHeap::vFree(int needToFree)
 {
     //needToFree.getID;
@@ -92,6 +135,7 @@ vHeap::vHeap(int pSize, int pOverWeight)
 {
     _binFILE = new BinaryFiles(); //le debe de entrar el overweight para la paginacion;
     _Size  = ( int* ) calloc(1,pSize);
+
 
     cout << _Size << endl;
 

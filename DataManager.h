@@ -17,7 +17,7 @@ class DataManager {
 public:
 	~DataManager();
 	static DataManager* getInstace();
-    void insertNewObject(int pType, int pID, int pOffset);
+    void insertNewObject(int pType, int pID, int pOffset, vRef *pVRef);
     void deleteData(int pID);
     lista_enlazada<DataInfo> *getMetaDatosList();
     DataInfo findDataInfo(int pID);

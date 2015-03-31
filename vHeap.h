@@ -35,6 +35,7 @@ public:
     DataManager* _dataManager;
 
 
+
 private:
     int _vRefID=0;
     int _offSet=0;
@@ -46,6 +47,8 @@ private:
 	static vHeap * memoryManager;
     void makePagination(vRef pDato);
     vRef readFromPagination(int pID);
+    void freeSpace();
+
 
 
 

@@ -12,10 +12,11 @@ DataInfo::DataInfo()
 
 }
 
-void DataInfo::initInfo(int pType,int pID,int pOffset)
+void DataInfo::initInfo(int pType,int pID,int pOffset, vRef* pVRef)
 {
     this->setOffset(pOffset);
     this->setID(pID);
+    this->setVRefPointer(pVRef);
 
     if (pType == Int)
     {
@@ -40,6 +41,9 @@ void DataInfo::initInfo(int pType,int pID,int pOffset)
     }
 
 }
+void DataInfo::setVRefPointer(vRef* pVRef){this->_vRefPointer = pVRef;}
+vRef* DataInfo::getVRefPointer(){return this->_vRefPointer;}
+
 void DataInfo::setID(int pID){this->_ID = pID;}
 int DataInfo::getID(){return this->_ID;}
 

@@ -14,10 +14,10 @@ DataManager::DataManager() {
     listaMetaDatos = new lista_enlazada<DataInfo>();
 }
 
-void DataManager::insertNewObject(int pType,int pID, int pOffset)
+void DataManager::insertNewObject(int pType,int pID, int pOffset, vRef* pVRef)
 {
     DataInfo* newDato = new DataInfo();
-    newDato->initInfo(pType,pID,pOffset);
+    newDato->initInfo(pType,pID,pOffset,pVRef);
     listaMetaDatos->add_Dato_Atras(*newDato);
 }
 

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-/*int main(){
+int main(){
 
     vHeap *heap;
 
@@ -18,6 +18,7 @@ using namespace std;
     heap->vMalloc(100,"int");
     heap->vMalloc(200, "char");
     heap->vMalloc(100,"int");
+    heap->vMalloc(110, "int");
 
 
     vInt vint = 2;
@@ -26,18 +27,6 @@ using namespace std;
     cout << vint2.getVData()<<endl;
 
 	return 0;
-};*/
+};
 
-
-
-    /* Our structure */
-    struct rec
-    {
-        int x,y,z;
-    };
-
-    int main()
-    {
-
-    }
 
