@@ -1,91 +1,69 @@
-/*
- * vRef.cpp
- *
- *  Created on: Mar 19, 2015
- *      Author: santii
- */
 
 #include "vRef.h"
 
-
-vRef::vRef(int id) {
-    this->heap->getInstace();
-    this->ID=id;
+vRef::vRef(int pId)
+{
+	_usageFlag = true;
+	_ID = pId;
 }
 
-vRef::~vRef() {
-	// TODO Auto-generated destructor stub
+int vRef::getId()
+{
+	return _ID;
 }
 
-
-//Sobrecarga del operador "*"
-void* vRef:: operator *(void* a){
-    //return &a;
-
+vRef* vRef::getReference()
+{
+	return this;
 }
 
-//Sobrecarga del operador "="
-void* vRef::operator =(void *pData){
-    if(pData == (vRef*) pData){
-             vRef pData=(vRef) pData;
-             pData.setId(this->getId());
-             return this;
-         }
-         else if(pData == (vObject*) pData){
-             if(pData == (vInt*) pData & sizeof(pData) == sizeof(int)){
-                 heap->vMalloc(sizeof(pData),"int");
-                 return this;
-             }
-             else if(pData==(vString*) pData & sizeof(pData)==sizeof(string)){
-                heap->vMalloc(sizeof(pData),"string");
-             }
-             else if(pData==(vChar*) pData & sizeof(pData)==sizeof(char)){
-                 heap->vMalloc(sizeof(pData),"char");
-             }
-             else if(pData==(vArray*) pData & sizeof(pData)==sizeof(int[])){
-                 heap->vMalloc(sizeof(pData),"array");
-             }
-             else if(pData==(vLong*) pData & sizeof(pData)==sizeof(long)){
-                 heap->vMalloc(sizeof(pData),"long");
-             }
-             else if(pData==(vFloat*) pData & sizeof(pData)==sizeof(float)){
-                 heap->vMalloc(sizeof(pData),"float");
-             }
-             else{
-                 heap->vMalloc(sizeof(pData),"vObeject");
-             }
+vObject* vRef::operator *()
+{
+	_usageFlag = true;
+	vObject* obj = new vObject();
+	return obj;
+}
 
-         }
-         else if(pData==(int*) pData){
-
-         }
-
-    }
-
-//Sobrecarga del operador "=="
-
- bool* vRef:: operator ==(void* pCompare){
-     if (this==b.id){
-         return true
-     }
-     else{
-         return false
-     }
-
- }
-//Sobrecarga del operador "++"
-void* vRef:: operator ++(void a){
+void vRef::operator =(void *pData)
+{
+	if (pData == (vRef*) pData)
+	{
+		//pRef->getId() == pData->getId();
+	}
+	else if (pData == (vObject*) pData)
+	{
+		//Se hace una escritura en el heap
+		// !!!!!!!!!!!!!!!!!!!
+	}
+	else if (pData == (int*) pData)
+	{
+		//aritmetica de punteros
+	}
 
 }
-//Sobrecarga del operador "--"
-void* vRef:: operator --(){
+//Compara si dos vRef apuntan al mismo espacio de memoria, en este caso
+//se comparan las direcciones de memoria de ambos objetos
+bool vRef::operator ==(vRef *pRef2)
+{
+    vRef *pRef1;
+	if (pRef1->getReference() == pRef2->getReference())
+	{
+		return true;
+	}
+	return false;
+}
 
+vRef::~vRef()
+{
+	_usageFlag = false;
 }
-*/
-//Sets & Gets
-void vRef::setId(int id){
-    this->ID->id;
-}
-int vRef::getId(){
-    return this->ID;
-}
+
+/*int main()
+{
+	vRef ref1;
+	vRef ref2;
+
+	cout << ref1.getReferencePointer() << endl;
+	cout << ref2.getReferencePointer() << endl;
+	ref1 = ref2;
+}*/

@@ -1,30 +1,22 @@
-/*
- * vRef.h
- *
- *  Created on: Mar 19, 2015
- *      Author: santii
- */
 
 #ifndef VREF_H_
 #define VREF_H_
-#include "vHeap.h"
+#include <iostream>
+#include "vobject.h"
+using namespace std;
 
 class vRef {
-protected:
-    int ID;
-    vHeap *heap;
+private:
+	int _ID;
+	bool _usageFlag;
 public:
-    vRef(int id);
-    virtual ~vRef();
-    //Sets & gets
-    void setId(int id);
-    int getId();
-    //Sobrecarga de operadores
-    void *operator =(void* a);
-    void *operator *(void* a);
-    void *operator ==(void* a);
-    void *operator --();
-    void *operator ++();
+	vRef(int);
+	virtual ~vRef();
+	int getId();
+	vRef* getReference();
+	vObject* operator* ();
+    void operator= (void*);
+    bool operator== (vRef*);
 
 };
 

@@ -8,14 +8,15 @@
 #include <lista_enlazada.h>
 #include <nodo.h>
 #include <vRef.h>
+#include "vHeap.h"
 
 class vGarbageCollector {
 private:
-    int _gcFrecuency;
-    vThread *gcThread;
+	int _gcFrecuency;
+	vHeap* _heap;
 public:
-    vGarbageCollector(int);
-    void avoidMemoryLeak(lista_enlazada<DataInfo>*,lista_enlazada<vRef>*);
+	vGarbageCollector(int, vHeap&);
+	void avoidMemoryLeak(lista_enlazada<DataInfo>*,lista_enlazada<vRef>*);
 };
 
 #endif

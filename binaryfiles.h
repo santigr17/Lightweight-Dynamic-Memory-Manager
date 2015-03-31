@@ -16,6 +16,7 @@ private:
 public:
     BinaryFiles();
     void writeToAFile(vRef pWrittingData);
+    //void writeToAFile(vRef pWrittingData);
     vRef readFromFile(int pReadingData);
 };
 
