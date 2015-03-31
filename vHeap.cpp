@@ -20,18 +20,18 @@ int vHeap:: _Overweight= 0; // Variable static Tamaño del archivo para paginaci
  */
 vRef* vHeap::vMalloc(size_t pSize, string pType)
 {
-    if(_offSet+pSize > 400 && _offSet+pSize > 500)
+    if(_offSet+pSize > TamanoHeap && _offSet+pSize > 500)
     {
        cout << "No hay suficiente espacio en el vheap"<< endl;
        exit(1);
     }
 
-    if (_offSet+pSize > 400)
+    if (_offSet+pSize > TamanoHeap)
     {
         freeSpace();
     }
 
-    vRef* memoryReference = new vRef(_vRefID);
+     vRef* memoryReference = new vRef(_vRefID);
     _vRefID++;
 
     //memoryReference = _Size[_offSet]; // Se le asigna el pedazo de memoria al vRef;
@@ -76,19 +76,38 @@ void vHeap::freeSpace()
     Nodo<DataInfo>* tmp = MetaDatoList->getHead();
     for(int i= 0; i< MetaDatoList->length(); i++)
     {
+        cout << "llega al for" << endl;
         if (!tmp->getData().isFlaginUse())
         {
             makePagination(*tmp->getData().getVRefPointer());
             cout<< "tmp ID: " << tmp->getData().getID()<< endl;
-            free(tmp->getData().getVRefPointer());
+            _offSet= _offSet-tmp->getData().getSize();
+            vFree(tmp->getData().getID());
         }
+        else
         tmp = tmp->getNext();
     }
+    reArrangeData();
+
 }
 
 void vHeap::reArrangeData()
 {
-
+    for(int* i =0; i<_Size; i++)
+    {
+        if(_Size[*i]==0)
+        {
+            for(int* j = i+1; j<_Size; j++)
+            {
+                if(_Size[*j]!=0)
+                {
+                    _Size[*i] = _Size[*j];
+                    _Size[*j] = 0;
+                    break;
+                }
+            }
+        }
+    }
 }
 
 
@@ -100,10 +119,13 @@ void vHeap::reArrangeData()
  */
 void vHeap::vFree(int needToFree)
 {
-    //needToFree.getID;
-    _dataManager->deleteData(needToFree);
-    free (_dataManager->findDataInfo(needToFree).getVRefPointer());
+    int deleteOffset = _dataManager->findDataInfo(needToFree).getOffset();
 
+    for(int i=0; i< _dataManager->findDataInfo(needToFree).getSize();i++)
+    {
+        _Size[deleteOffset+i] = 0;
+    }
+    reArrangeData();
 }
 
 /**
@@ -114,7 +136,7 @@ void vHeap::makePagination(vRef pDato)
 {
     _binFILE->writeToAFile(pDato);
     this->vFree(pDato.getId());
-    //hacer reacomodo del HEAP!
+    reArrangeData();
 }
 
 /**
@@ -173,7 +195,7 @@ vHeap* vHeap::getInstace()
         /*
          * ARREGLAR EL SIZEEEE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          */
-            memoryManager = new vHeap(400,_Overweight);// 400 = Size ARREGLARLO!.
+            memoryManager = new vHeap(TamanoHeap,_Overweight);// 400 = Size ARREGLARLO!.
 	        instanceFlag = true;
 	        return memoryManager;
 	    }

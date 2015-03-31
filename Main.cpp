@@ -18,7 +18,7 @@ int main(){
     heap->vMalloc(100,"int");
     heap->vMalloc(200, "char");
     heap->vMalloc(100,"int");
-    heap->vMalloc(110, "int");
+    heap->vMalloc(30, "int");
 
 
     vInt vint = 2;

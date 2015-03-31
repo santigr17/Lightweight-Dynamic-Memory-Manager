@@ -27,13 +27,9 @@ void vGarbageCollector::avoidMemoryLeak(lista_enlazada<DataInfo>* pMetadatos,lis
 
 				}
 				tmpListData = tmpListData->getNext();
-
 			}
-
 		}
 		tmpMetadatos = tmpMetadatos->getNext();
-
-
 	}
 	usleep(_gcFrecuency);
 }

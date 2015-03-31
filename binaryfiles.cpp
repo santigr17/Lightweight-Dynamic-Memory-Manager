@@ -8,7 +8,7 @@ BinaryFiles::BinaryFiles()
 
 vRef BinaryFiles::readFromFile(int pReadingData)
 {
-    _paginacionFile=fopen("test.bin", "rb");
+    _paginacionFile=fopen("/home/Documents/QT-Projects/GitHub/test.bin", "rb");
     if (!_paginacionFile)
         {
             printf("Unable to open file!");
@@ -41,7 +41,8 @@ vRef BinaryFiles::readFromFile(int pReadingData)
 
 void BinaryFiles::writeToAFile(vRef pWrittingData)
 {
-    _paginacionFile=fopen("test.bin","a+b");
+    _paginacionFile=fopen("/home/Documents/QT-Projects/GitHub/test.bin","a+b");
+    cout << "llego aqui" << endl;
     if (!_paginacionFile)
     {
         printf("Unable to open file!");

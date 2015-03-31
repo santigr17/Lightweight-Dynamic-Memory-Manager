@@ -22,6 +22,7 @@ using namespace std;
 #define String 1
 #define Char 2
 #define Array 3
+#define TamanoHeap 400
 
 
 class vHeap 	{
