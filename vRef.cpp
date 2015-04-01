@@ -43,10 +43,9 @@ void vRef::operator =(void *pData)
 }
 //Compara si dos vRef apuntan al mismo espacio de memoria, en este caso
 //se comparan las direcciones de memoria de ambos objetos
-bool vRef::operator ==(vRef *pRef2)
+bool vRef::operator ==(vRef * pVRef1,vRef* pVRef2)
 {
-    vRef *pRef1;
-	if (pRef1->getReference() == pRef2->getReference())
+    if (pVRef1->getId() == pVRef2->getId())
 	{
 		return true;
 	}

@@ -1,7 +1,7 @@
 
 #ifndef VREF_H_
 #define VREF_H_
-#include <iostream>
+
 #include "vobject.h"
 using namespace std;
 
@@ -16,7 +16,7 @@ public:
 	vRef* getReference();
 	vObject* operator* ();
     void operator= (void*);
-    bool operator== (vRef*);
+    bool operator== (vRef*, vRef*);
 
 };
 

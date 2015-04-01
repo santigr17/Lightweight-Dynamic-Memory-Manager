@@ -1,36 +1,26 @@
 #include <vGarbageCollector.h>
 
-/*vGarbageCollector::vGarbageCollector(int pFrecuency)
+vGarbageCollector::vGarbageCollector(int pFrecuency, vHeap& pHeap)
 {
-	_gcFrecuency = pFrecuency;
-    gcThread = new vThread();
+	this->_gcFrecuency = pFrecuency;
+	this->_heap = pHeap;
 }
 
-void vGarbageCollector::avoidMemoryLeak(lista_enlazada<DataInfo>* pMetadatos,lista_enlazada<vRef>* pListData)
+void vGarbageCollector::avoidMemoryLeak(lista_enlazada<DataInfo>* pMetadata)
 {
-	gcThread->vThread((void *)vGarbageCollector::avoidMemoryLeak(pMetadatos,pListData),nullptr);
+	vThread* gcThread = new vThread((void *)vGarbageCollector::avoidMemoryLeak(pMetadata),nullptr);
 	gcThread->run();
 
-	Nodo<DataInfo>* tmpMetadatos = pMetadatos->getHead();
-	Nodo<vRef>* tmpListData = pListData->getHead();
+	Nodo<DataInfo>* tmpMetadata = pMetadata->getHead();
 
-	for (int i = 0; i<pMetadatos->length(); i++)
+	for (int i = 0; i<pMetadata->length(); i++)
 	{
-		if (tmpMetadatos->getData().getReferenceCounter() == 0)
+		if (tmpMetadata->getData().getReferenceCounter() == 0)
 		{
-			for (int j = 0; j<pListData->length(); j++)
-			{
-				//Cuando coincida el ID del metadato y el vRef, se libera de memoria.
-				if((tmpMetadatos->getData().getID()) == (tmpListData->getData().getId()))
-				{
-					void free((void*) tmpListData->getData().getReferencePointer()); //getRef o algo asi (el dato a eliminar)
-
-				}
-				tmpListData = tmpListData->getNext();
-			}
+			_heap->vFree(tmpMetadata->getData().getID());
 		}
-		tmpMetadatos = tmpMetadatos->getNext();
+		tmpMetadata = tmpMetadata->getNext();
 	}
 	usleep(_gcFrecuency);
 }
-*/
+
