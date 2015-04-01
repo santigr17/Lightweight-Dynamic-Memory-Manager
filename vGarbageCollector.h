@@ -11,9 +11,8 @@
 class vGarbageCollector {
 private:
 	unsigned int _gcFrecuency;
-	vHeap* _heap;
 public:
-	vGarbageCollector(int, vHeap&);
+	vGarbageCollector(int);
 	void avoidMemoryLeak(lista_enlazada<DataInfo>*);
 };
 

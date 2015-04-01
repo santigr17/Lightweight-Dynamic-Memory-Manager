@@ -1,9 +1,8 @@
 #include <vGarbageCollector.h>
 
-vGarbageCollector::vGarbageCollector(int pFrecuency, vHeap& pHeap)
+vGarbageCollector::vGarbageCollector(int pFrecuency)
 {
-	this->_gcFrecuency = pFrecuency;
-	this->_heap = pHeap;
+	_gcFrecuency = pFrecuency;
 }
 
 void vGarbageCollector::avoidMemoryLeak(lista_enlazada<DataInfo>* pMetadata)
@@ -17,6 +16,7 @@ void vGarbageCollector::avoidMemoryLeak(lista_enlazada<DataInfo>* pMetadata)
 	{
 		if (tmpMetadata->getData().getReferenceCounter() == 0)
 		{
+			vHeap* _heap = vHeap::getInstace();
 			_heap->vFree(tmpMetadata->getData().getID());
 		}
 		tmpMetadata = tmpMetadata->getNext();

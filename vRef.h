@@ -10,13 +10,18 @@ private:
 	int _ID;
 	bool _usageFlag;
 public:
-	vRef(int);
+	vRef();
 	virtual ~vRef();
+	void setId(int pId);
 	int getId();
 	vRef* getReference();
 	vObject* operator* ();
-    void operator= (void*);
-    bool operator== (vRef*, vRef*);
+    void operator= (vObject*);
+    void operator= (vRef*);
+    void operator= (int*);
+    bool operator== (vRef*);
+    void operator++ ();
+    void operator-- ();
 
 };
 
