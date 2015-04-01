@@ -18,7 +18,7 @@ int vHeap:: _Overweight= 0; // Variable static Tamaño del archivo para paginaci
  * @param pType El tipo de dato que el usuario almacenara
  * @return un vRef que apuntara al pedazo de memoria que el usuario solicito
  */
-vRef* vHeap::vMalloc(size_t pSize, string pType)
+/*vRef* vHeap::vMalloc(size_t pSize, string pType)
 {
     if(_offSet+pSize > TamanoHeap && _offSet+pSize > 500)
     {
@@ -64,13 +64,13 @@ vRef* vHeap::vMalloc(size_t pSize, string pType)
    cout << "size: " << _Size-(_offSet)<<endl;
 
    return memoryReference;
-}
+}*/
 
 /**
  * @brief vHeap::freeSpace
  * Manda los archivos que no esten en uso a paginar.
  */
-void vHeap::freeSpace()
+/*void vHeap::freeSpace()
 {
     lista_enlazada<DataInfo>* MetaDatoList = _dataManager->getMetaDatosList();
     Nodo<DataInfo>* tmp = MetaDatoList->getHead();
@@ -90,7 +90,7 @@ void vHeap::freeSpace()
     reArrangeData();
 
 }
-
+*/
 void vHeap::reArrangeData()
 {
     for(int* i =0; i<_Size; i++)
@@ -132,24 +132,24 @@ void vHeap::vFree(int needToFree)
  * @brief vHeap::makePagination
  * @param pDato
  */
-void vHeap::makePagination(vRef pDato)
+/*void vHeap::makePagination(vRef pDato)
 {
     _binFILE->writeToAFile(pDato);
     this->vFree(pDato.getId());
     reArrangeData();
-}
+}*/
 
 /**
  * @brief vHeap::readFromPagination
  * @param pID
  * @return
  */
-vRef vHeap::readFromPagination(int pID)
+/*vRef vHeap::readFromPagination(int pID)
 {
     vRef tmpVRef = _binFILE->readFromFile(pID);// sobrecargar igual del vref para que apunte a lo que se le iguala
     //vRef.s // establecer a este vref el id
     return tmpVRef;
-}
+}*/
 
 
 

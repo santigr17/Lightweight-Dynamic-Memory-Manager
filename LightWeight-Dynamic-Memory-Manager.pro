@@ -13,10 +13,12 @@ SOURCES += \
     DataManager.cpp \
     crazythread.cpp \
     DataInfo.cpp \
-    vobject.cpp \
     vint.cpp \
     binaryfiles.cpp \
-    vThread.cpp
+    vThread.cpp \
+    vlong.cpp \
+    vfloat.cpp \
+    vchar.cpp
 
 OTHER_FILES += \
     LightWeight-Dynamic-Memory-Manager.pro.user \
@@ -34,5 +36,8 @@ HEADERS += \
     vobject.h \
     vint.h \
     binaryfiles.h \
-    vThread.h
+    vThread.h \
+    vlong.h \
+    vfloat.h \
+    vchar.h
 

@@ -6,25 +6,31 @@
  */
 #include "vHeap.h"
 #include "vint.h"
+#include "vlong.h"
+#include "vfloat.h"
+#include "vchar.h"
 #include "iostream"
 
 using namespace std;
 
 int main(){
 
-    vHeap *heap;
+  /*  vHeap *heap;
 
     heap = vHeap::getInstace();
     heap->vMalloc(100,"int");
     heap->vMalloc(200, "char");
     heap->vMalloc(100,"int");
-    heap->vMalloc(30, "int");
+    heap->vMalloc(110, "int");*/
+
+    const char *hola = "hola";
+    vChar vchar = "a";
+    cout << hola << endl;
+
+    float a = 123.123;
+    cout << a << endl;
 
 
-    vInt vint = 2;
-    vInt vint2 = vint;
-
-    cout << vint2.getVData()<<endl;
 
 	return 0;
 };

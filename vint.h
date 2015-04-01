@@ -1,17 +1,18 @@
 #ifndef VINT_H
 #define VINT_H
 
-class vInt
+#include "vobject.h"
+class vInt : public vObject<int>
 {
 public:
     vInt(int);
     ~vInt();
-    vInt operator=(int);
+    /*vInt operator=(int);
     friend vInt operator+(vInt&,vInt&);
     int getVData();
 private:
     int vdata;
-    void setVData(int);
+    void setVData(int);*/
 };
 
 #endif // VINT_H

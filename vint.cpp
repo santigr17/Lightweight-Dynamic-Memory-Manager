@@ -1,14 +1,15 @@
 #include "vint.h"
 
-vInt::vInt(int pdata){
-    vdata = pdata;
+vInt::vInt(int pdata):vObject(pdata){
+    this->setObejctDataType(0);
 }
+
 
 vInt::~vInt()
 {
     //delete;
 }
-
+/*
 int vInt::getVData()
 {
     return vdata;
@@ -31,3 +32,4 @@ vInt operator +(vInt &a, vInt &b)
     vInt *vint_result = new vInt(value);
     return *vint_result;
 }
+*/

@@ -1,15 +1,12 @@
 
 #include "vRef.h"
 
-vRef::vRef()
+/*vRef::vRef(int pId)
 {
 	_usageFlag = true;
+	_ID = pId;
 }
 
-void vRef::setId(int pId)
-{
-	this->_ID = pId;
-}
 int vRef::getId()
 {
 	return _ID;
@@ -19,75 +16,55 @@ vRef* vRef::getReference()
 {
 	return this;
 }
-
-
-vObject* vRef::operator *()
+*/
+/*vObject* vRef::operator *()
 {
 	_usageFlag = true;
-	//Falta hacer varas aqui
+	vObject* obj = new vObject();
+	return obj;
+}*/
+/*
+void vRef::operator =(void *pData)
+{
+	if (pData == (vRef*) pData)
+	{
+		//pRef->getId() == pData->getId();
+	}
+	else if (pData == (vObject*) pData)
+	{
+		//Se hace una escritura en el heap
+		// !!!!!!!!!!!!!!!!!!!
+	}
+	else if (pData == (int*) pData)
+	{
+		//aritmetica de punteros
+	}
+
 }
 
-void vRef::operator=(vObject* pData)
+//Compara si dos vRef apuntan al mismo espacio de memoria, en este caso
+//se comparan las direcciones de memoria de ambos objetos
+bool vRef::operator ==(vRef *pRef2)
 {
-	vHeap* _heap = vHeap::getInstace();
-	_heap->vMalloc(sizeof(pData), pData->getType());
-	// Ese & esta mal ahí, solo que no se como poner para que el
-	//vRef (this->getReference()) guarde la direccion de pData->getData()
-	this->getReference() = &(pData->getData());
-}
-
-void vRef::operator=(vRef* pVRef)
-{
-	this->getId() = pVRef->getId();
-}
-
-void vRef::operator =(int* pInt)
-{
-	//aritmetica de punteros
-}
-//Se verifican si los ID son iguales para saber si apuntan al
-//mismo espacio en memoria
-bool vRef::operator==(vRef* pVRef)
-{
-    if (this->getId() == pVRef->getId())
+    vRef *pRef1;
+	if (pRef1->getReference() == pRef2->getReference())
 	{
 		return true;
 	}
 	return false;
 }
 
-void vRef::operator++()
-{
-	DataManager* _manage = DataManager::getInstace();
-	Nodo<DataInfo>* tmpMetadata = _manage->getMetaDatosList()->getHead();
-	for (int i=0 ; i < _manage->getMetaDatosList()->length() ; i++)
-	{
-		if(this->getId() == tmpMetadata->getData().getID())
-		{
-			//Se le suma al offset
-			//tmpMetadata->getData().setOffset();
-		}
-	}
-}
-
-void vRef::operator--()
-{
-	DataManager* _manage = DataManager::getInstace();
-	Nodo<DataInfo>* tmpMetadata = _manage->getMetaDatosList()->getHead();
-	for (int i=0 ; i < _manage->getMetaDatosList()->length() ; i++)
-	{
-		if(this->getId() == tmpMetadata->getData().getID())
-		{
-			//Se le resta al offset
-			//tmpMetadata->getData().setOffset();
-		}
-	}
-
-}
-
-
 vRef::~vRef()
 {
 	_usageFlag = false;
 }
+*/
+/*int main()
+{
+	vRef ref1;
+	vRef ref2;
 
+	cout << ref1.getReferencePointer() << endl;
+	cout << ref2.getReferencePointer() << endl;
+	ref1 = ref2;
+}*/

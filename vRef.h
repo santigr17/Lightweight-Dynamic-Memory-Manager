@@ -1,7 +1,7 @@
 
 #ifndef VREF_H_
 #define VREF_H_
-
+#include <iostream>
 #include "vobject.h"
 using namespace std;
 
@@ -10,18 +10,13 @@ private:
 	int _ID;
 	bool _usageFlag;
 public:
-	vRef();
+	vRef(int);
 	virtual ~vRef();
-	void setId(int pId);
 	int getId();
 	vRef* getReference();
-	vObject* operator* ();
-    void operator= (vObject*);
-    void operator= (vRef*);
-    void operator= (int*);
-    bool operator== (vRef*);
-    void operator++ ();
-    void operator-- ();
+    //vObject* operator* ();
+    //void operator= (void*);
+    //bool operator== (vRef*);
 
 };
 

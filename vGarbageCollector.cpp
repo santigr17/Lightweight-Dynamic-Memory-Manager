@@ -7,8 +7,8 @@ vGarbageCollector::vGarbageCollector(int pFrecuency)
 
 void vGarbageCollector::avoidMemoryLeak(lista_enlazada<DataInfo>* pMetadata)
 {
-	vThread* gcThread = new vThread((void *)vGarbageCollector::avoidMemoryLeak(pMetadata),nullptr);
-	gcThread->run();
+//	vThread* gcThread = new vThread((void *)vGarbageCollector::avoidMemoryLeak(pMetadata),nullptr);
+    //gcThread->run();
 
 	Nodo<DataInfo>* tmpMetadata = pMetadata->getHead();
 
@@ -21,6 +21,6 @@ void vGarbageCollector::avoidMemoryLeak(lista_enlazada<DataInfo>* pMetadata)
 		}
 		tmpMetadata = tmpMetadata->getNext();
 	}
-	usleep(_gcFrecuency);
+    //usleep(_gcFrecuency);
 }
 
