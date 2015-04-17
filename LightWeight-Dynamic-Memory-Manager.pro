@@ -16,13 +16,19 @@ SOURCES += \
     vint.cpp \
     binaryfiles.cpp \
     vThread.cpp \
+    vObject.cpp \
+    vreflist.cpp \
+    docXML.cpp \
+    pugixml.cpp \
+    socketcliente.cpp \
+    vchar.cpp \
     vlong.cpp \
-    vfloat.cpp \
-    vchar.cpp
+    MainHeap.cpp
 
 OTHER_FILES += \
     LightWeight-Dynamic-Memory-Manager.pro.user \
-    vGarbageCollector.txt
+    vGarbageCollector.txt \
+    vheap.xml
 
 HEADERS += \
     vRef.h \
@@ -33,11 +39,16 @@ HEADERS += \
     DataManager.h \
     DataInfo.h \
     crazythread.h \
-    vobject.h \
     vint.h \
     binaryfiles.h \
     vThread.h \
+    vObject.h \
+    vreflist.h \
+    docXML.h \
+    pugiconfig.hpp \
+    pugixml.hpp \
+    socketcliente.h \
+    vchar.h \
     vlong.h \
-    vfloat.h \
-    vchar.h
+    MainHeap.h
 

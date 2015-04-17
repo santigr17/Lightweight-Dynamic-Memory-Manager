@@ -11,22 +11,33 @@
 #include "DataInfo.h"
 #include "lista_enlazada.h"
 #include "nodo.h"
+#include "fstream"
+#include <unistd.h>
+#include "vThread.h"
 
 
 class DataManager {
 public:
 	~DataManager();
 	static DataManager* getInstace();
-    void insertNewObject(int pType, int pID, int pOffset, vRef *pVRef);
+    void insertNewObject(int pType, int pID, int pOffset);
     void deleteData(int pID);
     lista_enlazada<DataInfo> *getMetaDatosList();
     DataInfo findDataInfo(int pID);
+    static void *dumpFrecuency();
+    void setDumpPath(string pDumpPath);
+    void setdumpFrecuency(int pFrecuency){dFrecuency = pFrecuency;}
 
 private:
+    static int dFrecuency;
 	DataManager();
-    lista_enlazada<DataInfo>* listaMetaDatos;
+    static lista_enlazada<DataInfo>* listaMetaDatos;
 	static bool instanceFlag;
 	static DataManager * dataManager;
+    static int dumpCounter;
+    static string _dumpPath;
+
+    static void* threadDumpFrec(void*);
 
 };
 

@@ -1,70 +1,135 @@
 
 #include "vRef.h"
-
-/*vRef::vRef(int pId)
+/**
+ * @brief vRef::vRef
+ */
+vRef::vRef()
 {
-	_usageFlag = true;
-	_ID = pId;
+
+    this->setObjectUsageFlag(true);
+    //this->setID(pID);
+    _dataManager = DataManager::getInstace();
 }
 
-int vRef::getId()
+/*!
+ * \brief vRef::operator *
+ * \return
+ */
+vObject vRef::operator *()
 {
-	return _ID;
+    this->setObjectUsageFlag(true);
+    //_dataManager->findDataInfo(this->getID()).setUsageFlag(true);
+    //_dataManager->findDataInfo(this->getID()).raiseCounter();
+
+    vObject* tmp = new vObject();
+    tmp = (vObject*)this->getObjectData();
+    tmp->setObjectID(this->getObjectID());
+
+
+    return *tmp;
 }
 
-vRef* vRef::getReference()
+/*!
+ * \brief vRef::operator =
+ * \param pVRef
+ */
+void vRef::operator =(vRef* pVRef)
 {
-	return this;
+    this->setObjectID(pVRef->getObjectID());
 }
-*/
-/*vObject* vRef::operator *()
+/*!
+ * \brief vRef::operator =
+ * \param pVObject
+ */
+void vRef::operator =(vObject* pVObject)
 {
-	_usageFlag = true;
-	vObject* obj = new vObject();
-	return obj;
-}*/
-/*
-void vRef::operator =(void *pData)
+    //verificar Tamaños
+    if(pVObject->getObjectType() == 0)
+    {
+        this->setObjectData((pVObject->getObjectData()));
+        this->setObjectType(0);
+    }
+    if(pVObject->getObjectType() == 1)
+    {
+        this->setObjectData((pVObject->getObjectData()));
+        this->setObjectType(1);
+    }
+    if(pVObject->getObjectType() == 2)
+    {
+        this->setObjectData((pVObject->getObjectData()));
+        this->setObjectType(2);
+    }
+    if(pVObject->getObjectType() == 3)
+    {
+        this->setObjectData((pVObject->getObjectData()));
+        this->setObjectType(3);
+    }
+    //this->setData( *pVObject);
+}
+/*!
+ * \brief vRef::operator =
+ * \param pInt
+ */
+void vRef::operator =(int pInt)
 {
-	if (pData == (vRef*) pData)
-	{
-		//pRef->getId() == pData->getId();
-	}
-	else if (pData == (vObject*) pData)
-	{
-		//Se hace una escritura en el heap
-		// !!!!!!!!!!!!!!!!!!!
-	}
-	else if (pData == (int*) pData)
-	{
-		//aritmetica de punteros
-	}
+    this->setObjectData((void*)(&pInt));
+}
+
+
+/*!
+ * \brief vRef::operator ==
+ * \param pVRef
+ * \return
+ */
+bool vRef::operator==(vRef* pVRef)
+{
+    if(this->_dataManager->findDataInfo(this->getObjectID()).getOffset() ==
+            _dataManager->findDataInfo(pVRef->getObjectID()).getOffset())
+    {
+        return true;
+    }
+}
+
+
+
+//Se verifican si los ID son iguales para saber si apuntan al
+//mismo espacio en memoria
+
+/*!
+ * \brief vRef::operator ++
+ */
+void vRef::operator++()
+{
+   this->setObjectData(this->getObjectData() + _dataManager->findDataInfo(this->getObjectID()).getSize());
+}
+/*!
+ * \brief vRef::operator --
+ */
+void vRef::operator--()
+{
 
 }
 
-//Compara si dos vRef apuntan al mismo espacio de memoria, en este caso
-//se comparan las direcciones de memoria de ambos objetos
-bool vRef::operator ==(vRef *pRef2)
-{
-    vRef *pRef1;
-	if (pRef1->getReference() == pRef2->getReference())
-	{
-		return true;
-	}
-	return false;
-}
 
 vRef::~vRef()
 {
-	_usageFlag = false;
+    this->setObjectUsageFlag(false);
 }
-*/
-/*int main()
-{
-	vRef ref1;
-	vRef ref2;
+/**
+ * @brief vRef::getBehindOffset: este metodo busca el id del vref que se encuentra anterior a este
+ * @return id del vref anterior
+ */
 
-	cout << ref1.getReferencePointer() << endl;
-	cout << ref2.getReferencePointer() << endl;
-	ref1 = ref2;
-}*/
+int vRef::getBehindOffset()
+{
+    Nodo<DataInfo>* tmp = _dataManager->getMetaDatosList()->getHead();
+    for(int i=0; _dataManager->getMetaDatosList()->length(); i++)
+    {
+        if ((tmp->getData().getOffset()+tmp->getData().getSize()) ==(_dataManager->findDataInfo(this->getObjectID()).getOffset()))
+        {
+            return tmp->getData().getID();
+        }
+    }
+    throw ("No hay ninguno antes");
+}
+

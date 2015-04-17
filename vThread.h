@@ -4,6 +4,8 @@
 #include <pthread.h>
 #include <string>
 
+
+class vThread;
 class vThread
 {
 private:

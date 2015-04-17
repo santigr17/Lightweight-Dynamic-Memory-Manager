@@ -3,7 +3,10 @@
 
 #include <iostream>
 
+
 using namespace std;
+
+//template class vRefList<vRef>;
 
 template<class k>
 class Nodo

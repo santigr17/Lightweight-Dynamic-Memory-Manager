@@ -1,13 +1,13 @@
 #ifndef VCHAR_H
 #define VCHAR_H
 
-#include "vobject.h"
+#include "vObject.h"
 
-class vChar : public vObject<const char *>
+class vChar : public vObject
 {
 public:
     vChar(const char*);
-    ~vChar();
+    vObject operator =(const char*);
 };
 
 #endif // VCHAR_H

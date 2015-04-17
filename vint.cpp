@@ -1,35 +1,21 @@
 #include "vint.h"
-
-vInt::vInt(int pdata):vObject(pdata){
-    this->setObejctDataType(0);
-}
-
-
-vInt::~vInt()
+/*!
+ * \brief vInt::vInt
+ * \param pdata
+ */
+vInt::vInt(void* pdata):vRef()
 {
-    //delete;
+    this->setObjectData((int*)(&pdata));
+    this->setObjectType(0);
 }
-/*
-int vInt::getVData()
+/*!
+ * \brief vInt::operator =
+ * \param pdata
+ * \return
+ */
+vObject vInt::operator =(void* pdata)
 {
-    return vdata;
+    vObject* vobj = new vInt(pdata);
+    return *vobj;
 }
 
-void vInt::setVData(int pdata)
-{
-    vdata = pdata;
-}
-
-vInt vInt::operator =(int a)
-{
-    vInt *vint = new vInt(a);
-    return *vint;
-}
-
-vInt operator +(vInt &a, vInt &b)
-{
-    int value = a.getVData() + b.getVData();
-    vInt *vint_result = new vInt(value);
-    return *vint_result;
-}
-*/

@@ -2,7 +2,9 @@
 #define LISTA_ENLAZADA_H
 #include <nodo.h>
 #include <iostream>
-#include <DataInfo.h>
+//#include <DataInfo.h>
+//#include "vreflist.h"
+//#include "DataManager.h"
 
 using namespace std;
 
@@ -41,15 +43,19 @@ void lista_enlazada<k>::add_Dato_Atras(k pdata)
 {
     Nodo<k>* nuevo_nodo = new Nodo<k>(pdata);
 
+
     if(_cabeza == nullptr)
     {
+
         _contador++;
 
         _cabeza = nuevo_nodo;
         _cola = _cabeza;
+
     }
     else
     {
+
         _contador++;
 
         _cola->setNext(nuevo_nodo);
@@ -83,7 +89,7 @@ void lista_enlazada<k>::eliminar_Dato(k pdata)
         }
         if(NodoActual->getNext() != _cola && NodoActual->getNext()->getData() == pdata)
         {
-            cout << "hello baby";
+            cout << "Entro Lista Enlazada eliminar dato";
             NodoActual->setNext(NodoActual->getNext()->getNext());
             return;
         }

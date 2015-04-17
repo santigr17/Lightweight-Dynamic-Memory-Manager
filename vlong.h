@@ -1,13 +1,13 @@
 #ifndef VLONG_H
 #define VLONG_H
 
-#include "vobject.h"
+#include "vObject.h"
 
-class vLong :public vObject<long>
+class vLong : public vObject
 {
 public:
     vLong(long);
-    ~vLong();
+    vObject operator=(long&);
 };
 
 #endif // VLONG_H

@@ -1,8 +1,21 @@
 #include "vchar.h"
-
-vChar::vChar(const char* pdata):vObject(pdata)
+/*!
+ * \brief vChar::vChar
+ * \param pdata
+ */
+vChar::vChar(const char* pdata)
 {
-    this->setObejctDataType(3);
+    this->setObjectData((void*)(&pdata));
+    this->setObjectType(1);
+}
+/*!
+ * \brief vChar::operator =
+ * \param pdata
+ * \return
+ */
+vObject vChar::operator =(const char* pdata)
+{
+    vObject* vobj = new vChar(pdata);
+    return *vobj;
 }
 
-vChar::~vChar(){}

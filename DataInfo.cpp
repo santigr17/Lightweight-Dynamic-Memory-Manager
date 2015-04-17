@@ -11,12 +11,17 @@ DataInfo::DataInfo()
 {
 
 }
-
-void DataInfo::initInfo(int pType,int pID,int pOffset, vRef* pVRef)
+/**
+ * @brief DataInfo::initInfo
+ * @param pType
+ * @param pID
+ * @param pOffset
+ */
+void DataInfo::initInfo(int pType, int pID, int pOffset)
 {
     this->setOffset(pOffset);
     this->setID(pID);
-    this->setVRefPointer(pVRef);
+    //this->setVRefPointer(pVRef);
 
     if (pType == Int)
     {
@@ -41,11 +46,14 @@ void DataInfo::initInfo(int pType,int pID,int pOffset, vRef* pVRef)
     }
 
 }
-void DataInfo::setVRefPointer(vRef* pVRef){this->_vRefPointer = pVRef;}
-vRef* DataInfo::getVRefPointer(){return this->_vRefPointer;}
+/*void DataInfo::setVRefPointer(vRef* pVRef){this->_vRefPointer = pVRef;}
+vRef* DataInfo::getVRefPointer(){return this->_vRefPointer;}*/
 
 void DataInfo::setID(int pID){this->_ID = pID;}
 int DataInfo::getID(){return this->_ID;}
+
+void DataInfo::raiseCounter(){this->_ReferenceCounter++;}
+void DataInfo::decreaseCounter(){this->_ReferenceCounter--;}
 
 void DataInfo::setType(string type){this->_Type = type;}
 string DataInfo::getType(){return this->_Type;}
@@ -57,8 +65,11 @@ void DataInfo::setReferenceCounter(int referenceCounter){ this->_ReferenceCounte
 int DataInfo::getReferenceCounter(){return this->_ReferenceCounter;}
 
 void DataInfo::setOffset(int offset){this->_Offset = offset;}
-int DataInfo::getOffset(){return this->getOffset();}
-
+int DataInfo::getOffset(){cout << " adasdas" << endl;return this->_Offset;}
+/**
+ * @brief DataInfo::isFlaginUse
+ * @return
+ */
 bool DataInfo::isFlaginUse()
 {
     if(this->_UsageFlag =false)return false;

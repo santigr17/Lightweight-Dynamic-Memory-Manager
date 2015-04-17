@@ -1,8 +1,20 @@
 #include "vlong.h"
-
-vLong::vLong(long pdata):vObject(pdata)
+/*!
+ * \brief vLong::vLong
+ * \param pdata
+ */
+vLong::vLong(long pdata)
 {
-    this->setObejctDataType(1);
+    this->setObjectData((void*)(&pdata));
+    this->setObjectType(2);
 }
-
-vLong::~vLong(){}
+/*!
+ * \brief vLong::operator =
+ * \param pdata
+ * \return
+ */
+vObject vLong::operator =(long &pdata)
+{
+    vObject* vobj = new vLong(pdata);
+    return *vobj;
+}

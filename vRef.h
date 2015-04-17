@@ -1,22 +1,42 @@
 
 #ifndef VREF_H_
 #define VREF_H_
-#include <iostream>
-#include "vobject.h"
+
+#include "vObject.h"
+#include "DataManager.h"
+#include "nodo.h"
+
+
+
 using namespace std;
 
-class vRef {
+
+class vRef:  public vObject {
 private:
-	int _ID;
+    /*int _ID;
 	bool _usageFlag;
+    vHeap* _heap;*/
+    DataManager* _dataManager;
+    int getBehindOffset();
+
+
+
 public:
-	vRef(int);
+    vRef();
 	virtual ~vRef();
-	int getId();
+
 	vRef* getReference();
-    //vObject* operator* ();
-    //void operator= (void*);
-    //bool operator== (vRef*);
+    vObject operator *();
+    void operator= (vObject* pVObject);
+    void operator= (int);
+    void operator= (vRef* pVRef);
+
+    bool operator== (vRef* pVRef);
+    void operator++ ();
+    void operator-- ();
+
+
+
 
 };
 

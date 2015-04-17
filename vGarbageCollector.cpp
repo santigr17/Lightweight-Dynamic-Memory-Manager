@@ -1,26 +1,54 @@
-#include <vGarbageCollector.h>
-
-vGarbageCollector::vGarbageCollector(int pFrecuency)
-{
-	_gcFrecuency = pFrecuency;
+#include "vGarbageCollector.h"
+/*!
+ * \brief vGarbageCollector::vGarbageCollector
+ * \param pXML
+ */
+vGarbageCollector::vGarbageCollector(docXML* pXML)
+{ 
+    _xml = pXML;
+    _gcFrecuency = _xml->getGCFrecuency();
+    //_gcThread = new vThread((void *)avoidMemoryLeak(),nullptr);
 }
-
-void vGarbageCollector::avoidMemoryLeak(lista_enlazada<DataInfo>* pMetadata)
+/*!
+ * \brief vGarbageCollector::avoidMemoryLeak
+ */
+void vGarbageCollector::avoidMemoryLeak()
 {
-//	vThread* gcThread = new vThread((void *)vGarbageCollector::avoidMemoryLeak(pMetadata),nullptr);
-    //gcThread->run();
+    cout << "avoid memory leak - garbage collector" << endl;
+   // _gcThread->run();
 
-	Nodo<DataInfo>* tmpMetadata = pMetadata->getHead();
+    DataManager* _manage = DataManager::getInstace();
+    vHeap* _heap = vHeap::getInstace();
 
-	for (int i = 0; i<pMetadata->length(); i++)
-	{
-		if (tmpMetadata->getData().getReferenceCounter() == 0)
-		{
-			vHeap* _heap = vHeap::getInstace();
-			_heap->vFree(tmpMetadata->getData().getID());
-		}
-		tmpMetadata = tmpMetadata->getNext();
-	}
-    //usleep(_gcFrecuency);
+    Nodo<DataInfo>* tmpMetadata = _manage->getMetaDatosList()->getHead();
+    Nodo<vRef>* tmpvRefList = _heap->getvRefList()->getHead();
+
+    for (int i = 0; i < _manage->getMetaDatosList()->length(); i++)
+    {
+        if (tmpMetadata->getData().getReferenceCounter() == 0)
+        {
+            for (int j = 0; j < _heap->getvRefList()->length(); j++)
+            {
+                if (tmpMetadata->getData().getID() == tmpvRefList->getData().getObjectID())
+                {
+                    if (_xml->getvDebug())
+                    {
+                        cout << "ID del vRef a eliminar: " << tmpvRefList->getData().getObjectID() << endl;
+                        cout << "counter: " << tmpMetadata->getData().getReferenceCounter() << endl;
+                    }
+
+                    _heap->vFree(tmpvRefList->getData());
+
+                    if (_xml->getvDebug())
+                    {
+                        cout << "ID del vRef a eliminar: " << tmpMetadata->getData().getSize() << endl;
+                        cout << "counter: " << tmpMetadata->getData().getOffset() << endl;
+                    }
+                }
+                tmpvRefList = tmpvRefList->getNext();
+            }
+        }
+        tmpMetadata = tmpMetadata->getNext();
+    }
+   // usleep(_gcFrecuency);
 }
-
